@@ -1,57 +1,62 @@
-# Hand-Gesture-Recognition
+<h1>Hand-Gesture-Recognition</h1>
+<p>This repository stores the source code for the hand gesture recognition model. Please note that you will need python and pip to be installed.</p>
 
-This repository stores the source code for the hand gesture recognition model.
+<p>To open the app in streamlit, download <code>requirements.txt</code>, <code>hand_gesture_reader_deployed.py</code>, <code>model_rf__date_time_2023_09_23__12_22_48__acc_1.0__hand__oneimage.pkl</code>.</p>
 
-Please note that you will need python and pip to be installed.
-To open the app in streamlit, download `requirements.txt`, `hand_gesture_reader_deployed.py`, `model_rf__date_time_2023_09_23__12_22_48__acc_1.0__hand__oneimage.pkl`.
-Next, enter the following command in the command prompt `pip install -r requirements.txt` to install the necessary libraries.
-Open the directory in a terminal where the files are stored and enter the following command `streamlit run hand_gesture_reader_deployed.py`.
-Alternatively, you may open using python by downloading and running the following file: `hand_gesture_reader.py`. (Make sure to install requirements first.)
+<p>Next, enter the following command in the command prompt <code>pip install -r requirements.txt</code> to install the necessary libraries.</p>
 
-When the `hand_gesture_reader.py` file is run, a webcam window opens which can predict four gestures.
-The gestures activate the following keys:
-1. Hand Closed - up arrow key
-2. Hand Three - right arrow key
-3. Hand Open - left arrow key
-4. Hand Zero - down arrow key
+<p>Open the directory in a terminal where the files are stored and enter the following command <code>streamlit run hand_gesture_reader_deployed.py</code>.</p>
 
-The sample images of gestures can be found at the end of README and in the sample_images folder.
+<p>Alternatively, you may open using python by downloading and running the following file: <code>hand_gesture_reader.py</code>. (Make sure to install requirements first.)</p>
 
-You may change the type of key to be activated by changing the `class_to_key` dictionary in `hand_gesture_reader.py` file. Just replace the dictionary values to a string representing the key you wish to activate. For example, you can change the key of the gesture `Closed` from `up` to `h` so that when the 'Hand Closed' gesture is shown, the program will activate the 'H' key. Refer to pyautogui documentation for the available keys.
+<p>When the <code>hand_gesture_reader.py</code> file is run, a webcam window opens which can predict four gestures. The gestures activate the following keys:</p>
 
-The `hand_gesture_reader.py` file uses the random forest model parameters from `model_rf__date_time_2023_09_23__12_22_48__acc_1.0__hand__oneimage.pkl` file. These parameters were trained in `model_hand_rf.py` file using the data stored in .npz files.
+<ol>
+  <li>Hand Closed - up arrow key</li>
+  <li>Hand Three - right arrow key</li>
+  <li>Hand Open - left arrow key</li>
+  <li>Hand Zero - down arrow key</li>
+</ol>
 
-The data was made using `hand_landmark_dataset_maker.py` file.
+<p>The sample images of gestures can be found at the end of README and in the sample_images folder.</p>
 
+<p>You may change the type of key to be activated by changing the <code>class_to_key</code> dictionary in <code>hand_gesture_reader.py</code> file. Just replace the dictionary values to a string representing the key you wish to activate. For example, you can change the key of the gesture <code>Closed</code> from <code>up</code> to <code>h</code> so that when the 'Hand Closed' gesture is shown, the program will activate the 'H' key. Refer to pyautogui documentation for the available keys.</p>
 
+<p>The <code>hand_gesture_reader.py</code> file uses the random forest model parameters from <code>model_rf__date_time_2023_09_23__12_22_48__acc_1.0__hand__oneimage.pkl</code> file. These parameters were trained in <code>model_hand_rf.py</code> file using the data stored in .npz files. The data was made using <code>hand_landmark_dataset_maker.py</code> file.</p>
 
+<p>Hand Closed <img src="sample_images/Hand Closed.jpg" alt="Hand Closed" /></p>
+<p>Hand Three <img src="sample_images/Hand Three.jpg" alt="Hand Three" /></p>
+<p>Hand Open <img src="sample_images/Hand Open.jpg" alt="Hand Open" /></p>
+<p>Hand Zero <img src="sample_images/Hand Zero.jpg" alt="Hand Zero" /></p>
 
-Hand Closed
-<img src='sample_images/Hand Closed.jpg'/>
+<hr />
 
+<!-- <h2>📊 Repository Stats &amp; Views</h2>
+<p>To give you an idea of how this project is performing and who is interacting with it, here are the real-time statistics:</p>
 
-Hand Three
-<img src='sample_images/Hand Three.jpg'/>
-
-
-Hand Open
-<img src='sample_images/Hand Open.jpg'/>
-
-
-Hand Zero
-<img src='sample_images/Hand Zero.jpg'/>
-
----
-
-## 📊 Repository Stats & Views
-
-To give you an idea of how this project is performing and who is interacting with it, here are the real-time statistics:
-
-| **Metric** | **Badge / Counter** |
-| :--- | :--- |
-| **Total Profile Views** | ![Views](https://komarev.com/ghpvc/?username=itskashfur&color=blue&style=flat-square) |
-| **Repository Visitors** | ![Visitor Count](https://profile-counter.glitch.me/itskashfur/count.svg) |
-| **Repo Stars** | ![GitHub stars](https://img.shields.io/github/stars/itskashfur/Hand_Gesture_Recognition?style=social) |
-| **Repo Forks** | ![GitHub forks](https://img.shields.io/github/forks/itskashfur/Hand_Gesture_Recognition?style=social) |
-
-> 💡 **Note:** The view counters automatically update every time someone loads this README page.
+<table border="1">
+  <thead>
+    <tr>
+      <th align="left"><strong>Metric</strong></th>
+      <th align="left"><strong>Badge / Counter</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><strong>Total Profile Views</strong></td>
+      <td align="left"><img src="https://komarev.com/ghpvc/?username=itskashfur&amp;color=blue&amp;style=flat-square" alt="Views" /></td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Repository Visitors</strong></td>
+      <td align="left"><img src="https://profile-counter.glitch.me/itskashfur/count.svg" alt="Visitor Count" /></td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Repo Stars</strong></td>
+      <td align="left"><img src="https://img.shields.io/github/stars/itskashfur/Hand_Gesture_Recognition?style=social" alt="GitHub stars" /></td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Repo Forks</strong></td>
+      <td align="left"><img src="https://img.shields.io/github/forks/itskashfur/Hand_Gesture_Recognition?style=social" alt="GitHub forks" /></td>
+    </tr>
+  </tbody> -->
+</table>
