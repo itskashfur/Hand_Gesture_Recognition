@@ -40,3 +40,18 @@ Hand Open
 
 Hand Zero
 <img src='sample_images/Hand Zero.jpg'/>
+
+---
+
+## 📊 Repository Stats & Views
+
+To give you an idea of how this project is performing and who is interacting with it, here are the real-time statistics:
+
+| **Metric** | **Badge / Counter** |
+| :--- | :--- |
+| **Total Profile Views** | ![Views](https://komarev.com/ghpvc/?username=itskashfur&color=blue&style=flat-square) |
+| **Repository Visitors** | ![Visitor Count](https://profile-counter.glitch.me/itskashfur/count.svg) |
+| **Repo Stars** | ![GitHub stars](https://img.shields.io/github/stars/itskashfur/Hand_Gesture_Recognition?style=social) |
+| **Repo Forks** | ![GitHub forks](https://img.shields.io/github/forks/itskashfur/Hand_Gesture_Recognition?style=social) |
+
+> 💡 **Note:** The view counters automatically update every time someone loads this README page.
