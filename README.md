@@ -59,4 +59,4 @@
       <td align="left"><img src="https://img.shields.io/github/forks/itskashfur/Hand_Gesture_Recognition?style=social" alt="GitHub forks" /></td>
     </tr>
   </tbody> -->
-</table>
+<!-- </table> -->
