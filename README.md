@@ -28,7 +28,7 @@
 <p>Hand Open <img src="sample_images/Hand Open.jpg" alt="Hand Open" /></p>
 <p>Hand Zero <img src="sample_images/Hand Zero.jpg" alt="Hand Zero" /></p>
 
-<hr />
+<!-- <hr /> -->
 
 <!-- <h2>📊 Repository Stats &amp; Views</h2>
 <p>To give you an idea of how this project is performing and who is interacting with it, here are the real-time statistics:</p>
