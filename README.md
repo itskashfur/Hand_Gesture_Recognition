@@ -23,10 +23,10 @@
 
 <p>The <code>hand_gesture_reader.py</code> file uses the random forest model parameters from <code>model_rf__date_time_2023_09_23__12_22_48__acc_1.0__hand__oneimage.pkl</code> file. These parameters were trained in <code>model_hand_rf.py</code> file using the data stored in .npz files. The data was made using <code>hand_landmark_dataset_maker.py</code> file.</p>
 
-<p>Hand Closed <img src="sample_images/Hand Closed.jpg" alt="Hand Closed" /></p>
-<p>Hand Three <img src="sample_images/Hand Three.jpg" alt="Hand Three" /></p>
-<p>Hand Open <img src="sample_images/Hand Open.jpg" alt="Hand Open" /></p>
-<p>Hand Zero <img src="sample_images/Hand Zero.jpg" alt="Hand Zero" /></p>
+<p>Hand Closed <br> <img src="sample_images/Hand Closed.jpg" alt="Hand Closed" /></p>
+<p>Hand Three <br> <img src="sample_images/Hand Three.jpg" alt="Hand Three" /></p>
+<p>Hand Open <br> <img src="sample_images/Hand Open.jpg" alt="Hand Open" /></p>
+<p>Hand Zero <br> <img src="sample_images/Hand Zero.jpg" alt="Hand Zero" /></p>
 
 <!-- <hr /> -->
 
