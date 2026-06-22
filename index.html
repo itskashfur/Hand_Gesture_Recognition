@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Hand Gesture Recognition & Arcade Dashboard</title>
+  <link rel="stylesheet" href="index.css">
+  
+  <!-- MediaPipe CDN Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <!-- Header -->
+    <header>
+      <div class="brand-section">
+        <div class="logo-container">
+          <svg class="logo-svg" viewBox="0 0 24 24">
+            <path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+          </svg>
+        </div>
+        <div class="title-area">
+          <h1>Neural Gesture Dashboard</h1>
+          <p>Real-Time Hand Tracking & Edge AI Inference Engine</p>
+        </div>
+      </div>
+      
+      <div class="status-panel">
+        <button id="audio-toggle" class="audio-toggle-btn">
+          🔊 AUDIO: ON
+        </button>
+        <div class="status-indicator">
+          <span class="status-dot active" id="sys-status-dot"></span>
+          <span id="sys-status-text">SYSTEM STANDBY</span>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Main Dashboard Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Panel 1: Vision Center (Webcam & Tracking) -->
+      <section class="panel-card" id="vision-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="panel-title-icon"></span>
+            <h2>Vision Center</h2>
+          </div>
+          <span class="panel-subtitle">Webcam Node</span>
+        </div>
+        
+        <div class="webcam-container">
+          <!-- Hidden video element feeds the canvas/mediapipe -->
+          <video id="webcam-video" class="webcam-video" autoplay playsinline muted></video>
+          <!-- Canvas draws the hand skeletons overlay -->
+          <canvas id="canvas-overlay" class="canvas-overlay"></canvas>
+          
+          <div class="vision-status" id="vision-overlay-status">
+            <span class="status-dot active processing" id="tracking-pulse"></span>
+            <span id="tracking-text">Awaiting Camera...</span>
+          </div>
+        </div>
+        
+        <div class="tracking-instructions">
+          <strong>Interactive Instructions:</strong>
+          <ul>
+            <li>Enable camera permissions when prompted.</li>
+            <li>Keep your hand inside the camera frame.</li>
+            <li>Perform gestures to trigger game actions:
+              <ul>
+                <li><strong>Closed Hand</strong> (Fist)</li>
+                <li><strong>Hand Three</strong> (Three fingers up)</li>
+                <li><strong>Open Hand</strong> (Flat palm)</li>
+                <li><strong>Hand Zero</strong> (Circle or OK gesture)</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+      
+      <!-- Panel 2: Brain Center (Edge Inference & Mappings) -->
+      <section class="panel-card" id="brain-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="panel-title-icon"></span>
+            <h2>Brain Center</h2>
+          </div>
+          <span class="panel-subtitle">MLP Inference Node</span>
+        </div>
+        
+        <div class="gesture-list">
+          
+          <!-- Class 0: Hand Closed -->
+          <div class="gesture-item" id="gesture-0" data-class="0">
+            <div class="gesture-meta">
+              <div class="gesture-info">
+                <div class="gesture-thumbnail-box">✊</div>
+                <span class="gesture-name">Closed (Fist)</span>
+              </div>
+              <select class="gesture-mapping-select" data-class="0">
+                <option value="up" selected>JUMP (UP)</option>
+                <option value="down">SLIDE (DOWN)</option>
+                <option value="left">LEFT</option>
+                <option value="right">RIGHT</option>
+                <option value="none">UNMAPPED</option>
+              </select>
+            </div>
+            <div class="gesture-meta">
+              <div class="gesture-bar-container">
+                <div class="gesture-bar-fill" id="bar-0"></div>
+              </div>
+              <span class="gesture-value" id="val-0">0%</span>
+            </div>
+          </div>
+          
+          <!-- Class 1: Hand Three -->
+          <div class="gesture-item" id="gesture-1" data-class="1">
+            <div class="gesture-meta">
+              <div class="gesture-info">
+                <div class="gesture-thumbnail-box">👌</div>
+                <span class="gesture-name">Three (Fingers)</span>
+              </div>
+              <select class="gesture-mapping-select" data-class="1">
+                <option value="up">JUMP (UP)</option>
+                <option value="down">SLIDE (DOWN)</option>
+                <option value="left">LEFT</option>
+                <option value="right" selected>RIGHT</option>
+                <option value="none">UNMAPPED</option>
+              </select>
+            </div>
+            <div class="gesture-meta">
+              <div class="gesture-bar-container">
+                <div class="gesture-bar-fill" id="bar-1"></div>
+              </div>
+              <span class="gesture-value" id="val-1">0%</span>
+            </div>
+          </div>
+          
+          <!-- Class 2: Hand Open -->
+          <div class="gesture-item" id="gesture-2" data-class="2">
+            <div class="gesture-meta">
+              <div class="gesture-info">
+                <div class="gesture-thumbnail-box">🖐️</div>
+                <span class="gesture-name">Open (Palm)</span>
+              </div>
+              <select class="gesture-mapping-select" data-class="2">
+                <option value="up">JUMP (UP)</option>
+                <option value="down">SLIDE (DOWN)</option>
+                <option value="left" selected>LEFT</option>
+                <option value="right">RIGHT</option>
+                <option value="none">UNMAPPED</option>
+              </select>
+            </div>
+            <div class="gesture-meta">
+              <div class="gesture-bar-container">
+                <div class="gesture-bar-fill" id="bar-2"></div>
+              </div>
+              <span class="gesture-value" id="val-2">0%</span>
+            </div>
+          </div>
+          
+          <!-- Class 3: Hand Zero -->
+          <div class="gesture-item" id="gesture-3" data-class="3">
+            <div class="gesture-meta">
+              <div class="gesture-info">
+                <div class="gesture-thumbnail-box">👌</div>
+                <span class="gesture-name">Zero (Circle)</span>
+              </div>
+              <select class="gesture-mapping-select" data-class="3">
+                <option value="up">JUMP (UP)</option>
+                <option value="down" selected>SLIDE (DOWN)</option>
+                <option value="left">LEFT</option>
+                <option value="right">RIGHT</option>
+                <option value="none">UNMAPPED</option>
+              </select>
+            </div>
+            <div class="gesture-meta">
+              <div class="gesture-bar-container">
+                <div class="gesture-bar-fill" id="bar-3"></div>
+              </div>
+              <span class="gesture-value" id="val-3">0%</span>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="calibration-grid">
+          <div class="calib-data-box">
+            <span class="calib-label">Wrist Position (X, Y)</span>
+            <span class="calib-value" id="calib-wrist">-</span>
+          </div>
+          <div class="calib-data-box">
+            <span class="calib-label">Hand Scale factor</span>
+            <span class="calib-value" id="calib-scale">-</span>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Panel 3: Neural Arcade (Neon Game Engine) -->
+      <section class="panel-card" id="arcade-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="panel-title-icon"></span>
+            <h2>Neural Arcade</h2>
+          </div>
+          <span class="panel-subtitle">Neon Runner Engine v1.0</span>
+        </div>
+        
+        <div class="arcade-cabinet">
+          <div class="arcade-screen-bezel">
+            <canvas id="arcade-canvas" class="arcade-canvas" width="640" height="360"></canvas>
+            <div class="arcade-bezel-shadow"></div>
+          </div>
+          
+          <div class="arcade-stats">
+            <div class="stat-item">
+              <span class="stat-label">Distance</span>
+              <span class="stat-value" id="game-score">0m</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">High Score</span>
+              <span class="stat-value high-score" id="game-highscore">0m</span>
+            </div>
+          </div>
+          
+          <div class="arcade-controls-base">
+            <div class="direction-pad">
+              <div class="dir-indicator" id="dir-up">
+                <span class="dir-action">JUMP</span>
+                <span class="dir-key">UP</span>
+              </div>
+              <div class="dir-indicator" id="dir-down">
+                <span class="dir-action">SLIDE</span>
+                <span class="dir-key">DOWN</span>
+              </div>
+              <div class="dir-indicator" id="dir-left">
+                <span class="dir-action">LEFT</span>
+                <span class="dir-key">LEFT</span>
+              </div>
+              <div class="dir-indicator" id="dir-right">
+                <span class="dir-action">RIGHT</span>
+                <span class="dir-key">RIGHT</span>
+              </div>
+            </div>
+            
+            <div class="btn-group">
+              <button id="game-start-btn" class="btn btn-primary">
+                ▶ START SIMULATOR
+              </button>
+              <button id="game-reset-btn" class="btn btn-secondary">
+                🔄 RESET
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+      <p>Powered by Edge AI &bull; Built in HTML, Vanilla CSS, and Web Audio APIs &bull; View Project Code in <a href="#" onclick="return false;">Workspace</a></p>
+    </footer>
+    
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
